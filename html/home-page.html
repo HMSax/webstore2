@@ -1,58 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Startsida</title>
-    <link rel="shortcut icon" href="../favicon2.ico" type="favicon.ico">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/custom.css">
-</head>
+    <link rel="shortcut icon" href="favicon2.ico" type="favicon.ico" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/custom.css" />
+  </head>
 
-<body>
-
-    <nav class="navbar navbar-expand-sm navbar-dark">
-        <div class="container-fluid"> 
-            <a class="navbar-brand" href="home-page.html"><img src="../logo2tr.png" alt="Logo" height="80"></a>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="home-page.html">Hem</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="produkter.html">Produkter</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="om-oss.html">Om oss</a>
-                  </li>
-                </ul>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html"
+            ><img src="logo2tr.png" alt="Logo" height="80"
+          /></a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse collapse" id="collapse">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html"
+                  >Hem</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="produkter.html">Produkter</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="om-oss.html">Om oss</a>
+              </li>
+            </ul>
+          </div>
         </div>
-       <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Sök på en produkt..." aria-label="Search">
-          <button class="btn btn-outline-primary" type="submit">Sök</button>
-        </form>
-        
-    </nav>
-    
-    <div class="container pt-5 text-center custom-bg-col">
-          <div class="startPageImage"><img src="https://fontmeme.com/permalink/240321/f00666fd86449304e0241640ed1e3015.png" alt="outline-fonts"></div>
-          <br><br>
-          <p>Härligt att se att du har glidit in till oss!</p>
-          <p>Här kan du hitta ett brett utbud av produkter till fantastiska priser. Bläddra igenom vår katalog och gör din beställning idag.</p>
-          <p>Ta gärna en titt på vår "Om oss"-sida för utterligare information om teamet bakom webshoppen.</p>
-          <br><br><br><br>
+      </nav>
     </div>
-    <img class="img-fluid centeredX z-n1" src="https://68.media.tumblr.com/7796b1444c4697326fcbdac3a904a502/tumblr_or57fw1u4z1wrrjawo2_250.gif" alt="Sliding otter">
-    <hr>
+    <div class="container pt-5 text-center custom-bg-col">
+      <div class="startPageImage">
+        <img
+          src="https://fontmeme.com/permalink/240321/f00666fd86449304e0241640ed1e3015.png"
+          alt="outline-fonts"
+        />
+      </div>
+      <br /><br />
+      <p>Härligt att se att du har glidit in till oss!</p>
+      <p>
+        Här kan du hitta ett brett utbud av produkter till fantastiska priser.
+        Bläddra igenom vår katalog och gör din beställning idag.
+      </p>
+      <p>
+        Ta gärna en titt på vår "Om oss"-sida för utterligare information om
+        teamet bakom webshoppen.
+      </p>
+      <br />
+      <p>
+        <small
+          ><em
+            >Group 2shoP är ett grupparbete i kursen Frontend på Nackademin och
+            <strong>inte</strong> en verklig webbutik.
+            <br />
+            Produkterna är hämtade från
+            <a href="https://fakestoreapi.com/" target="_blank"
+              >Fake Store API</a
+            >.</em
+          ></small
+        >
+      </p>
+      <br /><br />
+    </div>
+    <img
+      class="img-fluid centeredX z-n1"
+      src="https://68.media.tumblr.com/7796b1444c4697326fcbdac3a904a502/tumblr_or57fw1u4z1wrrjawo2_250.gif"
+      alt="Sliding otter"
+    />
+    <hr />
     <footer>
-        <div class="container text-center">Copyright &copy; <span id="cRyear"></span>
-        </div>
+      <div class="container text-center">
+        Copyright &copy; <span id="cRyear"></span>
+      </div>
     </footer>
 
-    <script src="../js/script.js"></script>
-
-</body>
-
+    <script src="js/script.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

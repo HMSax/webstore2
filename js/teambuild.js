@@ -48,7 +48,13 @@ teamList.push(martinSax);
 
 teamList.forEach((member) => {
   let teamMember = document.createElement("div");
-  teamMember.classList.add("col-lg-auto", "col-md-5", "col-sm-6", "mb-4");
+  teamMember.classList.add(
+    "col-lg-auto",
+    "col-md-5",
+    "col-sm-6",
+    "mb-4",
+    "mx-auto"
+  );
   teamMember.innerHTML = `
                 <div class="card h-100 align-items-center mx-auto">
                     <img class="card-img-top rounded-circle border border-3 border-primary" src="${member.photoLink}" alt="${member.name}">
