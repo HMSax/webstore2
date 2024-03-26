@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
+  let allProductsJSON = [];
+  let productsInCartJSON = [];
+  localStorage.setItem("productsInCart", JSON.stringify(productsInCartJSON));
   // Hämta produkter från Fake Store API och rendera dem på sidan
   fetch("https://fakestoreapi.com/products")
     .then((response) => {
@@ -10,6 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((data) => {
       const productList = document.getElementById("product-list");
       data.forEach((product) => {
+        //lägg till JSON-objekt i array
+        allProductsJSON.push(product);
+
         // Skapa produktkort
         const productCard = document.createElement("div");
         productCard.classList.add(
@@ -32,12 +38,14 @@ document.addEventListener("DOMContentLoaded", function () {
                   </div>
                   <div class="d-flex flex-column card-body product-button">
                     <p class="card-text">$${product.price}</p>
-                    <button class="btn btn-primary btn-order">Beställ</button>
+                    <button class="btn btn-primary btn-order" id="addToCart">Lägg i kundvagn</button>
                   </div>
                 </div>
             `;
         productList.appendChild(productCard);
       });
+      // Spara alla produkter i localStorage
+      localStorage.setItem("allProductsArray", JSON.stringify(allProductsJSON));
     })
     .catch((error) => {
       console.error("Fetch error:", error);
@@ -58,14 +66,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (event.target.classList.contains("btn-order")) {
       event.preventDefault();
+      let arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
+      console.log(arrayFromLS.length);
+      for (let i = 0; i < allProductsJSON.length; i++) {
+        if ((allProductsJSON[i].title = productName)) {
+          arrayFromLS.push(allProductsJSON[i]);
+          break;
+        }
+      }
+      console.log(arrayFromLS.length);
+      console.log(arrayFromLS);
+      localStorage.setItem("productsInCart", JSON.stringify(arrayFromLS));
+      cartCount();
 
       // Skapa en URL för beställningsformuläret med produktinformationen som query parametrar
-      const orderFormUrl = `order.html?product=${encodeURIComponent(
-        productName
-      )}&price=${encodeURIComponent(productPrice)}`;
+      //const orderFormUrl = `order.html?product=${encodeURIComponent(
+      //  productName
+      // )}&price=${encodeURIComponent(productPrice)}`;
 
       // Omdirigera användaren till beställningsformuläret
-      window.location.href = orderFormUrl;
+      //window.location.href = orderFormUrl;
 
       // Sätter produktinfo i offcanvas
     } else {
@@ -79,3 +99,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //dynamiskt år i footer
 document.getElementById("cRyear").innerHTML = new Date().getFullYear();
+
+function cartCount() {
+  arrayToCount = JSON.parse(localStorage.getItem("productsInCart"));
+  if (arrayToCount.length != null) {
+    document.getElementById("cartItemsCount").innerHTML = arrayToCount.length;
+  } else {
+    document.getElementById("cartItemsCount").innerHTML = 0;
+  }
+}
