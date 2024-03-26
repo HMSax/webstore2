@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
   let allProductsJSON = [];
-  let productsInCartJSON = [];
-  localStorage.setItem("productsInCart", JSON.stringify(productsInCartJSON));
+  if (JSON.parse((localStorage.getItem("productsInCart").length = null))) {
+    let productsInCartJSON = [];
+    localStorage.setItem("productsInCart", JSON.stringify(productsInCartJSON));
+  }
   // Hämta produkter från Fake Store API och rendera dem på sidan
   fetch("https://fakestoreapi.com/products")
     .then((response) => {
@@ -99,6 +101,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //dynamiskt år i footer
 document.getElementById("cRyear").innerHTML = new Date().getFullYear();
+
+//Uppdatera kundvagnsräknaren
+cartCount();
 
 function cartCount() {
   arrayToCount = JSON.parse(localStorage.getItem("productsInCart"));
