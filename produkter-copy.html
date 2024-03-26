@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webbshop - Produkter</title>
+    <link rel="shortcut icon" href="favicon2.ico" type="favicon.ico" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/custom.css" />
+    <link rel="stylesheet" href="css/product.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html"
+            ><img src="logo2tr.png" alt="Logo" height="80"
+          /></a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse collapse" id="collapse">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Hem</a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="produkter.html"
+                  >Produkter</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="om-oss.html">Om oss</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="container pt-5">
+      <!-- Produkerna listas här -->
+      <h2 id="product-page">Produkter</h2>
+      <div class="row" id="product-list"></div>
+      <hr />
+      <footer>
+        <div class="container text-center">
+          Copyright &copy; <span id="cRyear"></span>
+        </div>
+      </footer>
+      <!--offcanvas-->
+      <div
+        class="offcanvas offcanvas-start"
+        tabindex="-1"
+        id="offcanvas-product"
+        aria-labelledby="offcanvas-product-title"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvas-product-title">
+            Offcanvas title
+          </h5>
+          <button
+            type="button"
+            class="btn-close text-reset"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div id="offcanvas-product-description" class="offcanvas-body">
+          Offcanvas product description.
+        </div>
+      </div>
+    </div>
+    <script src="js/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
