@@ -31,96 +31,91 @@
               </li>
             </ul>
       </div>
-      <a class="me-auto nav-item nav-link active" aria-current="page" href="cart.html">&#128722<span id="cartItemsCount">0</span></a>
+      <a class="me-auto nav-item nav-link active" aria-current="page" href="cart.html">&#128722<span id="cartItemsCount2">0</span></a>
   </div>
 </nav>
   </div>
   <div class="container pt-5">
-
-    <hr>
-    <!-- Beställningsformulär -->
-    <h3 style="text-align: center;">Beställningsformulär</h3>
-    <div class="form-container">
-      <form id="order-form" method="post" class="needs-validation" novalidate>
-        <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8 mb-2">
-        <label for="namn" class="form-label">Namn</label>
-        <input type="namn" name="namn" id="namn" placeholder="Förnamn Efternamn" class="form-control" maxlength="50">
-        <div class="invalid-feedback">
-          Ange ett giltigt namn.
-        </div>
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8 mb-2">
-        <label for="telefon" class="form-label">Telefonnummer</label>
-        <input type="telefon" name="telefon" id="telefon" placeholder="Telefonnummer" class="form-control" maxlength="50">
-        <div class="invalid-feedback">
-          Ange ett giltigt nummer.
-        </div>
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8 mb-2">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" name="email" id="email" placeholder="name@example.com" class="form-control" maxlength="50">
-        <div class="invalid-feedback">
-          Ange en giltig emailadress.
-        </div>
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8 mb-2">
-        <label for="namn" class="form-label">Leveransadress</label>
-        <input type="adress" name="Leveransadress" id="adress" placeholder="Gatuadress Postnummer Ort" class="form-control" maxlength="107">
-        <div class="invalid-feedback">
-          Ange en giltig adress.
-        </div>
-        </div>
-        </div>
-
-        <div class="btn-wrapper">
-          <button class="btn btn-primary disabled" type="submit" value="Skicka" id="send">Beställ</button>
-        </div>
-      </form>
-    </div>
-
-    <!-- Modalfönster för bekräftelse -->
-    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title" id="successModalLabel">Bekräftelse</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <i style="font-size: 30px;">Tack för din beställning, <span id="modalName"></span>!</i>
-            <hr>
-            <p style="font-size: 30px;">Produkt: </p>
-            <p><span id="modalProductName"></p></span>
-            <p><span id="modalProductPrice"></span></p>
-            <p style="font-size: 30px;">Leveransadress: </p>
-            <p><span id="modalName"></span></p>
-            <p><span id="modalAddress"></span></p>
-            <p><span id="modalPhone"></span></p>
-            <p><span id="modalEmail"></span></p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Stäng</button>
+        <!-- Summering av kundvagnen -->
+        <h2 id="cart-page">Kundvagn</h2>
+    <section class="h-100 h-custom" style="background-color: #418fd8;">
+        <div class="container h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12">
+              <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                <div class="card-body p-0">
+                  <div class="row g-0">
+                    <div class="col-lg-8">
+                      <div class="p-5">
+                        <div class="d-flex justify-content-between align-items-center mb-5">
+                          <h1 class="fw-bold mb-0 text-black">Innehåll</h1>
+                          <h6 class="mb-0 text-muted"><span id="cartItemsCount">0</span> varor</h6>
+                        </div>
+                        <div id="cart-display"></div>
+      
+                        <hr class="my-4">
+      
+                        <div class="pt-5">
+                          <h6 class="mb-0"><a href="#!" class="text-body"><i
+                                class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 bg-grey">
+                      <div class="p-5">
+                        <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                        <hr class="my-4">
+      
+                        <div class="d-flex justify-content-between mb-4">
+                          <h5 class="text-uppercase">items 3</h5>
+                          <h5>€ 132.00</h5>
+                        </div>
+      
+                        <h5 class="text-uppercase mb-3">Shipping</h5>
+      
+                        <div class="mb-4 pb-2">
+                          <select class="select">
+                            <option value="1">Standard-Delivery- €5.00</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                            <option value="4">Four</option>
+                          </select>
+                        </div>
+      
+                        <h5 class="text-uppercase mb-3">Give code</h5>
+      
+                        <div class="mb-5">
+                          <div class="form-outline">
+                            <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
+                            <label class="form-label" for="form3Examplea2">Enter your code</label>
+                          </div>
+                        </div>
+      
+                        <hr class="my-4">
+      
+                        <div class="d-flex justify-content-between mb-5">
+                          <h5 class="text-uppercase">Total price</h5>
+                          <h5>€ 137.00</h5>
+                        </div>
+      
+                        <button type="button" class="btn btn-dark btn-block btn-lg"
+                          data-mdb-ripple-color="dark">Register</button>
+      
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
   </div>
-  <hr>
   <footer>
     <div class="container text-center">Copyright &copy; <span id="cRyear"></span>
     </div>
 </footer>
+<script src="js/checkout.js"></script>
 <script src="js/main.js"></script>
 <script src="js/script.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

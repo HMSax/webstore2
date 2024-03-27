@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   let allProducts = [];
-  if (typeof localStorage.getItem("productsInCart") != "undefined") {
+  if (typeof localStorage.getItem("productsInCart") == "undefined") {
     let productsInCartJSON = [];
     localStorage.setItem("productsInCart", JSON.stringify(productsInCartJSON));
   }
@@ -110,11 +110,22 @@ document.getElementById("cRyear").innerHTML = new Date().getFullYear();
 //Uppdatera kundvagnsräknaren
 cartCount();
 
+document.getElementById("cartItemsCount2").innerHTML = cartCount2();
+
 function cartCount() {
   arrayToCount = JSON.parse(localStorage.getItem("productsInCart"));
   if (arrayToCount.length != null) {
     document.getElementById("cartItemsCount").innerHTML = arrayToCount.length;
   } else {
     document.getElementById("cartItemsCount").innerHTML = 0;
+  }
+}
+
+function cartCount2() {
+  arrayToCount = JSON.parse(localStorage.getItem("productsInCart"));
+  if (arrayToCount.length != null) {
+    return arrayToCount.length;
+  } else {
+    return 0;
   }
 }
