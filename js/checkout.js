@@ -51,8 +51,7 @@ function updateCartDisplay() {
   </div>
   <div class="col-md-3 col-lg-3 col-xl-3 d-flex">
     <button class="btn btn-link px-2"
-      onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-      >
+      onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
       <i class="fas fa-minus"></i>
     </button>
 
@@ -161,6 +160,12 @@ document.addEventListener("click", function (event) {
       }
     }
     localStorage.setItem("productsInCart", JSON.stringify(arrayAfterDel));
+    location.reload();
+  }
+  //töm kundvagn-knappen
+  else if (event.target.classList.contains("emptyCart")) {
+    let productsInCartJSON = [];
+    localStorage.setItem("productsInCart", JSON.stringify(productsInCartJSON));
     location.reload();
   }
 });
