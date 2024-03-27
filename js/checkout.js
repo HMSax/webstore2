@@ -1,26 +1,31 @@
-let inCartList = JSON.parse(localStorage.getItem("productsInCart"));
-
-let removeDupl = (inCartList) => {
-  const flag = {};
-  const unique = [];
-  inCartList.forEach((elem) => {
-    if (!flag[elem.title]) {
-      flag[elem.title] = true;
-      unique.push(elem);
-    }
-  });
-  return unique;
-};
-let uniqueInCart = removeDupl(inCartList);
-
 let sumCounter = 0;
+
 let itemsCounter = 0;
 
-const cartDisplay = document.getElementById("cart-display");
+let cartDisplay = document.getElementById("cart-display");
 
 updateCartDisplay();
 
 function updateCartDisplay() {
+  sumCounter = 0;
+  itemsCounter = 0;
+
+  let inCartList = JSON.parse(localStorage.getItem("productsInCart"));
+
+  let removeDupl = (inCartList) => {
+    const flag = {};
+    const unique = [];
+    inCartList.forEach((elem) => {
+      if (!flag[elem.title]) {
+        flag[elem.title] = true;
+        unique.push(elem);
+      }
+    });
+    return unique;
+  };
+
+  let uniqueInCart = removeDupl(inCartList);
+
   uniqueInCart.forEach((product) => {
     const productInCart = document.createElement("div");
     let amountThisProductInCart = 0;
@@ -67,16 +72,20 @@ function updateCartDisplay() {
 </div>
 `;
     const productPrice = parseFloat(product.price);
-    sumCounter += productPrice;
+    sumCounter += productPrice * amountThisProductInCart;
     itemsCounter += amountThisProductInCart;
 
     cartDisplay.appendChild(productInCart);
   });
+  document.getElementById("cartItemsCount2").innerHTML = uniqueInCart.length;
 }
 
 document.getElementById("items-count").innerHTML =
   "Antal varor: " + itemsCounter;
-document.getElementById("cost-count").innerHTML = "Summa: $" + sumCounter;
+
+document.getElementById("cost-count").innerHTML =
+  "Summa: $" + sumCounter.toFixed(2);
+
 //dynamiskt år i footer
 document.getElementById("cRyear").innerHTML = new Date().getFullYear();
 
@@ -90,8 +99,6 @@ document.getElementById("checkOutBtn").onclick = function () {
   window.location.href = orderFormUrl;
 };
 
-document.getElementById("cartItemsCount2").innerHTML = uniqueInCart.length;
-
 function cartCount() {
   arrayToCount = JSON.parse(localStorage.getItem("productsInCart"));
   if (arrayToCount.length != null) {
@@ -100,3 +107,39 @@ function cartCount() {
     document.getElementById("cartItemsCount").innerHTML = 0;
   }
 }
+
+document.addEventListener("click", function (event) {
+  // Hämta produktinformation
+  const productName = event.target
+    .closest("[data-product]")
+    .getAttribute("data-product");
+  const productPrice = event.target
+    .closest("[data-price]")
+    .getAttribute("data-price");
+
+  //minusknappen
+  if (event.target.classList.contains("fa-minus")) {
+    event.preventDefault();
+
+    let arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
+    let allProd = JSON.parse(localStorage.getItem("allProductsArray"));
+    let keepGoing = true;
+    for (let i = arrayFromLS.length - 1; i >= 0 && keepGoing; i--) {
+      let obj = arrayFromLS[i];
+      if (obj.title == productName) {
+        keepGoing = false;
+        arrayFromLS.splice(i, 1);
+      }
+    }
+    localStorage.setItem("productsInCart", JSON.stringify(arrayFromLS));
+    location.reload();
+
+    // plusknappen
+  } else if (event.target.classList.contains("fa-plus")) {
+    event.preventDefault();
+  }
+  // deleteknappen
+  else if (event.target.classList.contains("fa-trash")) {
+    event.preventDefault();
+  }
+});

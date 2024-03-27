@@ -73,16 +73,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
       let arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
       let allProd = JSON.parse(localStorage.getItem("allProductsArray"));
-      console.log(arrayFromLS.length);
-      console.log(allProd);
+
       for (let i = 0; i < allProd.length; i++) {
         let obj = allProd[i];
         if (obj.title == productName) {
           arrayFromLS.push(obj);
         }
       }
-      console.log(arrayFromLS.length);
-      console.log(arrayFromLS);
+
       localStorage.setItem("productsInCart", JSON.stringify(arrayFromLS));
       cartCount();
 
