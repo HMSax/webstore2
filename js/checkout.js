@@ -1,46 +1,47 @@
-let sumCounter = 0;
+document.addEventListener("DOMContentLoaded", function () {
+  let sumCounter = 0;
 
-let itemsCounter = 0;
+  let itemsCounter = 0;
 
-let cartDisplay = document.getElementById("cart-display");
+  let cartDisplay = document.getElementById("cart-display");
 
-updateCartDisplay();
+  updateCartDisplay();
 
-function updateCartDisplay() {
-  sumCounter = 0;
-  itemsCounter = 0;
+  function updateCartDisplay() {
+    sumCounter = 0;
+    itemsCounter = 0;
 
-  let inCartList = JSON.parse(localStorage.getItem("productsInCart"));
+    let inCartList = JSON.parse(localStorage.getItem("productsInCart"));
 
-  let removeDupl = (inCartList) => {
-    const flag = {};
-    const unique = [];
-    inCartList.forEach((elem) => {
-      if (!flag[elem.title]) {
-        flag[elem.title] = true;
-        unique.push(elem);
+    let removeDupl = (inCartList) => {
+      const flag = {};
+      const unique = [];
+      inCartList.forEach((elem) => {
+        if (!flag[elem.title]) {
+          flag[elem.title] = true;
+          unique.push(elem);
+        }
+      });
+      return unique;
+    };
+
+    let uniqueInCart = removeDupl(inCartList);
+
+    localStorage.setItem("uniqueInCart", JSON.stringify(uniqueInCart));
+
+    uniqueInCart.forEach((product) => {
+      const productInCart = document.createElement("div");
+      let amountThisProductInCart = 0;
+      for (n = 0; n < inCartList.length; n++) {
+        if (inCartList[n].title == product.title) {
+          amountThisProductInCart++;
+        }
       }
-    });
-    return unique;
-  };
+      productInCart.setAttribute("data-product", `${product.title}`);
+      productInCart.setAttribute("data-price", `${product.price}`);
+      productInCart.setAttribute("data-image", `${product.image}`);
 
-  let uniqueInCart = removeDupl(inCartList);
-
-  localStorage.setItem("uniqueInCart", JSON.stringify(uniqueInCart));
-
-  uniqueInCart.forEach((product) => {
-    const productInCart = document.createElement("div");
-    let amountThisProductInCart = 0;
-    for (n = 0; n < inCartList.length; n++) {
-      if (inCartList[n].title == product.title) {
-        amountThisProductInCart++;
-      }
-    }
-    productInCart.setAttribute("data-product", `${product.title}`);
-    productInCart.setAttribute("data-price", `${product.price}`);
-    productInCart.setAttribute("data-image", `${product.image}`);
-
-    productInCart.innerHTML = `
+      productInCart.innerHTML = `
 <hr class="my-4">
 <div class="row mb-1 d-flex justify-content-between align-items-center">
   <div class="col-md-2 col-lg-2 col-xl-2">
@@ -77,100 +78,101 @@ function updateCartDisplay() {
   </div>
 </div>
 `;
-    const productPrice = parseFloat(product.price);
-    sumCounter += productPrice * amountThisProductInCart;
-    itemsCounter += amountThisProductInCart;
+      const productPrice = parseFloat(product.price);
+      sumCounter += productPrice * amountThisProductInCart;
+      itemsCounter += amountThisProductInCart;
 
-    cartDisplay.appendChild(productInCart);
+      cartDisplay.appendChild(productInCart);
+    });
+    document.getElementById("cartItemsCount2").innerHTML = uniqueInCart.length;
+  }
+
+  document.getElementById("items-count").innerHTML =
+    "Antal varor: " + itemsCounter;
+
+  document.getElementById("cost-count").innerHTML =
+    "Summa: $" + sumCounter.toFixed(2);
+
+  //dynamiskt år i footer
+  document.getElementById("cRyear").innerHTML = new Date().getFullYear();
+
+  //Uppdatera kundvagnsräknaren
+  cartCount();
+
+  document.getElementById("checkOutBtn").onclick = function () {
+    sumForURL = sumCounter.toFixed(2);
+    // Skapa en URL för beställningsformuläret med produktinformationen som query parametrar
+    const orderFormUrl = `order.html?price=${encodeURIComponent(sumForURL)}`;
+    // Omdirigera användaren till beställningsformuläret
+    window.location.href = orderFormUrl;
+  };
+
+  function cartCount() {
+    arrayToCount = JSON.parse(localStorage.getItem("productsInCart"));
+    if (arrayToCount.length != null) {
+      document.getElementById("cartItemsCount").innerHTML = arrayToCount.length;
+    } else {
+      document.getElementById("cartItemsCount").innerHTML = 0;
+    }
+  }
+
+  document.addEventListener("click", function (event) {
+    // Hämta produktinformation
+    const productName = event.target
+      .closest("[data-product]")
+      .getAttribute("data-product");
+
+    //minusknappen
+    if (event.target.classList.contains("fa-minus")) {
+      event.preventDefault();
+      let arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
+      let keepGoing = true;
+      for (let i = arrayFromLS.length - 1; i >= 0 && keepGoing; i--) {
+        let obj = arrayFromLS[i];
+        if (obj.title == productName) {
+          keepGoing = false;
+          arrayFromLS.splice(i, 1);
+        }
+      }
+      localStorage.setItem("productsInCart", JSON.stringify(arrayFromLS));
+      location.reload();
+
+      // plusknappen
+    } else if (event.target.classList.contains("fa-plus")) {
+      event.preventDefault();
+      let arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
+      let keepGoing = true;
+      for (let i = 0; i < arrayFromLS.length && keepGoing; i++) {
+        let obj = arrayFromLS[i];
+        if (obj.title == productName) {
+          keepGoing = false;
+          arrayFromLS.push(obj);
+        }
+      }
+      localStorage.setItem("productsInCart", JSON.stringify(arrayFromLS));
+      location.reload();
+    }
+    // deleteknappen
+    else if (event.target.classList.contains("fa-trash")) {
+      event.preventDefault();
+      let arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
+      let arrayAfterDel = arrayFromLS;
+      for (let i = 0; i < arrayFromLS.length; i++) {
+        let obj = arrayFromLS[i];
+        if (obj.title == productName) {
+          arrayAfterDel.splice(i, 1);
+        }
+      }
+      localStorage.setItem("productsInCart", JSON.stringify(arrayAfterDel));
+      location.reload();
+    }
   });
-  document.getElementById("cartItemsCount2").innerHTML = uniqueInCart.length;
-}
 
-document.getElementById("items-count").innerHTML =
-  "Antal varor: " + itemsCounter;
+  //töm kundvagn-knappen
 
-document.getElementById("cost-count").innerHTML =
-  "Summa: $" + sumCounter.toFixed(2);
-
-//dynamiskt år i footer
-document.getElementById("cRyear").innerHTML = new Date().getFullYear();
-
-//Uppdatera kundvagnsräknaren
-cartCount();
-
-document.getElementById("checkOutBtn").onclick = function () {
-  sumForURL = sumCounter.toFixed(2);
-  // Skapa en URL för beställningsformuläret med produktinformationen som query parametrar
-  const orderFormUrl = `order.html?price=${encodeURIComponent(sumForURL)}`;
-  // Omdirigera användaren till beställningsformuläret
-  window.location.href = orderFormUrl;
-};
-
-function cartCount() {
-  arrayToCount = JSON.parse(localStorage.getItem("productsInCart"));
-  if (arrayToCount.length != null) {
-    document.getElementById("cartItemsCount").innerHTML = arrayToCount.length;
-  } else {
-    document.getElementById("cartItemsCount").innerHTML = 0;
-  }
-}
-
-document.addEventListener("click", function (event) {
-  // Hämta produktinformation
-  const productName = event.target
-    .closest("[data-product]")
-    .getAttribute("data-product");
-
-  //minusknappen
-  if (event.target.classList.contains("fa-minus")) {
-    event.preventDefault();
-    let arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
-    let keepGoing = true;
-    for (let i = arrayFromLS.length - 1; i >= 0 && keepGoing; i--) {
-      let obj = arrayFromLS[i];
-      if (obj.title == productName) {
-        keepGoing = false;
-        arrayFromLS.splice(i, 1);
-      }
-    }
-    localStorage.setItem("productsInCart", JSON.stringify(arrayFromLS));
+  document.getElementById("emptyCart").onclick = function () {
+    let productsInCartJSON = [];
+    localStorage.setItem("productsInCart", JSON.stringify(productsInCartJSON));
     location.reload();
-
-    // plusknappen
-  } else if (event.target.classList.contains("fa-plus")) {
-    event.preventDefault();
-    let arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
-    let keepGoing = true;
-    for (let i = 0; i < arrayFromLS.length && keepGoing; i++) {
-      let obj = arrayFromLS[i];
-      if (obj.title == productName) {
-        keepGoing = false;
-        arrayFromLS.push(obj);
-      }
-    }
-    localStorage.setItem("productsInCart", JSON.stringify(arrayFromLS));
-    location.reload();
-  }
-  // deleteknappen
-  else if (event.target.classList.contains("fa-trash")) {
-    event.preventDefault();
-    let arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
-    let arrayAfterDel = arrayFromLS;
-    for (let i = 0; i < arrayFromLS.length; i++) {
-      let obj = arrayFromLS[i];
-      if (obj.title == productName) {
-        arrayAfterDel.splice(i, 1);
-      }
-    }
-    localStorage.setItem("productsInCart", JSON.stringify(arrayAfterDel));
-    location.reload();
-  }
+  };
 });
-
-//töm kundvagn-knappen
-
-document.getElementById("emptyCart").onclick = function () {
-  let productsInCartJSON = [];
-  localStorage.setItem("productsInCart", JSON.stringify(productsInCartJSON));
-  location.reload();
-};

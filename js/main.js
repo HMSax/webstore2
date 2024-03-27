@@ -109,3 +109,7 @@ form.addEventListener("submit", function (event) {
     successModal.show();
   }
 });
+document.getElementById("closeAndReset").onclick = function () {
+  let productsInCartJSON = [];
+  localStorage.setItem("productsInCart", JSON.stringify(productsInCartJSON));
+};
