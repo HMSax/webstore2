@@ -55,6 +55,13 @@ document.getElementById("cRyear").innerHTML = new Date().getFullYear();
 //Uppdatera kundvagnsräknaren
 cartCount();
 
+document.getElementById("checkOutBtn").onclick = function () {
+  // Skapa en URL för beställningsformuläret med produktinformationen som query parametrar
+  const orderFormUrl = `order.html?price=${encodeURIComponent(sumCounter)}`;
+  // Omdirigera användaren till beställningsformuläret
+  window.location.href = orderFormUrl;
+};
+
 document.getElementById("cartItemsCount2").innerHTML = cartCount2();
 
 function cartCount() {

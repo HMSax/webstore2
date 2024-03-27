@@ -86,14 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.setItem("productsInCart", JSON.stringify(arrayFromLS));
       cartCount();
 
-      // Skapa en URL för beställningsformuläret med produktinformationen som query parametrar
-      //const orderFormUrl = `order.html?product=${encodeURIComponent(
-      //  productName
-      // )}&price=${encodeURIComponent(productPrice)}`;
-
-      // Omdirigera användaren till beställningsformuläret
-      //window.location.href = orderFormUrl;
-
       // Sätter produktinfo i offcanvas
     } else {
       document.getElementById("offcanvas-product-title").innerHTML =

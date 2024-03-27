@@ -73,14 +73,16 @@ form.addEventListener("submit", function (event) {
 
     // Hämta produktinformation från URL-parametrarna
     const urlParams = new URLSearchParams(window.location.search);
-    const productName = urlParams.get("product");
+    const productName =
+      "Antal varor: " +
+      JSON.parse(localStorage.getItem("productsInCart")).length;
     const productPrice = urlParams.get("price");
 
     // Fyll i modalfönstret med användarens uppgifter och produktinformation
     document.getElementById("modalProductName").textContent = productName;
     document.getElementById(
       "modalProductPrice"
-    ).textContent = `$${productPrice}`;
+    ).textContent = `Summa: $${productPrice}`;
     document.getElementById("modalName").textContent = name;
     document.getElementById("modalPhone").textContent = phone;
     document.getElementById("modalEmail").textContent = email;
