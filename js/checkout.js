@@ -1,26 +1,31 @@
 let inCartList = JSON.parse(localStorage.getItem("productsInCart"));
+let sumCounter = 0;
 
 const cartDisplay = document.getElementById("cart-display");
 
-cartDisplay.innerHTML = `
+inCartList.forEach((product) => {
+  const productInCart = document.createElement("div");
+  productInCart.setAttribute("data-product", `${product.title}`);
+  productInCart.setAttribute("data-price", `${product.price}`);
+  productInCart.setAttribute("data-image", `${product.image}`);
+  productInCart.innerHTML = `
 <hr class="my-4">
-<div class="row mb-4 d-flex justify-content-between align-items-center">
+<div class="row mb-1 d-flex justify-content-between align-items-center">
   <div class="col-md-2 col-lg-2 col-xl-2">
     <img
-      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img7.webp"
-      class="img-fluid rounded-3" alt="Cotton T-shirt">
+      src="${product.image}"
+      class="img-fluid rounded-3" alt="${product.title}">
   </div>
   <div class="col-md-3 col-lg-3 col-xl-3">
-    <h6 class="text-muted">Shirt</h6>
-    <h6 class="text-black mb-0">Cotton T-shirt</h6>
+    <h6 class="text-muted">${product.title}</h6>
   </div>
-  <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+  <div class="col-md-3 col-lg-3 col-xl-3 d-flex">
     <button class="btn btn-link px-2"
       onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
       <i class="fas fa-minus"></i>
     </button>
 
-    <input id="form1" min="0" name="quantity" value="1" type="number"
+    <input id="form${product.title}" min="0" name="quantity" value="1" type="number"
       class="form-control form-control-sm" />
 
     <button class="btn btn-link px-2"
@@ -29,10 +34,43 @@ cartDisplay.innerHTML = `
     </button>
   </div>
   <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-    <h6 class="mb-0">€ 44.00</h6>
+    <h6 class="mb-0">$ ${product.price}</h6>
   </div>
   <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-    <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
+    <a href="#!" class="text-muted"><i class="fas fa-trash"></i></a>
   </div>
 </div>
 `;
+  const productPrice = parseFloat(product.price);
+  sumCounter += productPrice;
+
+  cartDisplay.appendChild(productInCart);
+});
+
+document.getElementById("items-count").innerHTML = "Varor: " + 0;
+document.getElementById("cost-count").innerHTML = "Summa: $" + sumCounter;
+//dynamiskt år i footer
+document.getElementById("cRyear").innerHTML = new Date().getFullYear();
+
+//Uppdatera kundvagnsräknaren
+cartCount();
+
+document.getElementById("cartItemsCount2").innerHTML = cartCount2();
+
+function cartCount() {
+  arrayToCount = JSON.parse(localStorage.getItem("productsInCart"));
+  if (arrayToCount.length != null) {
+    document.getElementById("cartItemsCount").innerHTML = arrayToCount.length;
+  } else {
+    document.getElementById("cartItemsCount").innerHTML = 0;
+  }
+}
+
+function cartCount2() {
+  arrayToCount = JSON.parse(localStorage.getItem("productsInCart"));
+  if (arrayToCount.length != null) {
+    return arrayToCount.length;
+  } else {
+    return 0;
+  }
+}
