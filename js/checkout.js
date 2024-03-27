@@ -162,10 +162,12 @@ document.addEventListener("click", function (event) {
     localStorage.setItem("productsInCart", JSON.stringify(arrayAfterDel));
     location.reload();
   }
-  //töm kundvagn-knappen
-  else if (event.target.classList.contains("emptyCart")) {
-    let productsInCartJSON = [];
-    localStorage.setItem("productsInCart", JSON.stringify(productsInCartJSON));
-    location.reload();
-  }
 });
+
+//töm kundvagn-knappen
+
+document.getElementById("emptyCart").onclick = function () {
+  let productsInCartJSON = [];
+  localStorage.setItem("productsInCart", JSON.stringify(productsInCartJSON));
+  location.reload();
+};
