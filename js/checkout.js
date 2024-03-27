@@ -147,5 +147,15 @@ document.addEventListener("click", function (event) {
   // deleteknappen
   else if (event.target.classList.contains("fa-trash")) {
     event.preventDefault();
+    let arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
+    let arrayAfterDel = arrayFromLS;
+    for (let i = 0; i < arrayFromLS.length; i++) {
+      let obj = arrayFromLS[i];
+      if (obj.title == productName) {
+        arrayAfterDel.splice(i, 1);
+      }
+    }
+    localStorage.setItem("productsInCart", JSON.stringify(arrayAfterDel));
+    location.reload();
   }
 });
