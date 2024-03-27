@@ -1,14 +1,26 @@
 let inCartList = JSON.parse(localStorage.getItem("productsInCart"));
+let uniqueInCart = Array.from(new Set(inCartList));
 let sumCounter = 0;
+let itemsCounter = 0;
 
 const cartDisplay = document.getElementById("cart-display");
 
-inCartList.forEach((product) => {
-  const productInCart = document.createElement("div");
-  productInCart.setAttribute("data-product", `${product.title}`);
-  productInCart.setAttribute("data-price", `${product.price}`);
-  productInCart.setAttribute("data-image", `${product.image}`);
-  productInCart.innerHTML = `
+updateCartDisplay();
+
+function updateCartDisplay() {
+  uniqueInCart.forEach((product) => {
+    const productInCart = document.createElement("div");
+    let amountThisProductInCart = 0;
+    for (n = 0; n < inCartList.length; n++) {
+      if (inCartList[n].title == product.title) {
+        amountThisProductInCart++;
+      }
+    }
+    productInCart.setAttribute("data-product", `${product.title}`);
+    productInCart.setAttribute("data-price", `${product.price}`);
+    productInCart.setAttribute("data-image", `${product.image}`);
+
+    productInCart.innerHTML = `
 <hr class="my-4">
 <div class="row mb-1 d-flex justify-content-between align-items-center">
   <div class="col-md-2 col-lg-2 col-xl-2">
@@ -25,7 +37,7 @@ inCartList.forEach((product) => {
       <i class="fas fa-minus"></i>
     </button>
 
-    <input id="form${product.title}" min="0" name="quantity" value="1" type="number"
+    <input id="form${product.title}" min="0" name="quantity" value="${amountThisProductInCart}" type="number"
       class="form-control form-control-sm" />
 
     <button class="btn btn-link px-2"
@@ -41,13 +53,15 @@ inCartList.forEach((product) => {
   </div>
 </div>
 `;
-  const productPrice = parseFloat(product.price);
-  sumCounter += productPrice;
+    const productPrice = parseFloat(product.price);
+    sumCounter += productPrice;
+    itemsCounter += amountThisProductInCart;
 
-  cartDisplay.appendChild(productInCart);
-});
+    cartDisplay.appendChild(productInCart);
+  });
+}
 
-document.getElementById("items-count").innerHTML = "Varor: " + 0;
+document.getElementById("items-count").innerHTML = "Varor: " + itemsCounter;
 document.getElementById("cost-count").innerHTML = "Summa: $" + sumCounter;
 //dynamiskt år i footer
 document.getElementById("cRyear").innerHTML = new Date().getFullYear();
