@@ -51,12 +51,15 @@ function updateCartDisplay() {
   </div>
   <div class="col-md-3 col-lg-3 col-xl-3 d-flex">
     <button class="btn btn-link px-2"
-      onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+      onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+      >
       <i class="fas fa-minus"></i>
     </button>
 
-    <input id="form${product.title}" min="0" name="quantity" value="${amountThisProductInCart}" type="number"
-      class="form-control form-control-sm" />
+    <input id="form${
+      product.title
+    }" min="0" name="quantity" value="${amountThisProductInCart}" type="number"
+      class="form-control form-control-sm text-end" readonly="" />
 
     <button class="btn btn-link px-2"
       onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
@@ -64,7 +67,9 @@ function updateCartDisplay() {
     </button>
   </div>
   <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-    <h6 class="mb-0">$ ${product.price}</h6>
+    <h6 class="mb-0">Totalpris:<br>$ ${(
+      product.price * amountThisProductInCart
+    ).toFixed(2)}</h6>
   </div>
   <div class="col-md-1 col-lg-1 col-xl-1 text-end">
     <a href="#!" class="text-muted"><i class="fas fa-trash"></i></a>
