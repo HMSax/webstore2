@@ -113,16 +113,11 @@ document.addEventListener("click", function (event) {
   const productName = event.target
     .closest("[data-product]")
     .getAttribute("data-product");
-  const productPrice = event.target
-    .closest("[data-price]")
-    .getAttribute("data-price");
 
   //minusknappen
   if (event.target.classList.contains("fa-minus")) {
     event.preventDefault();
-
     let arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
-    let allProd = JSON.parse(localStorage.getItem("allProductsArray"));
     let keepGoing = true;
     for (let i = arrayFromLS.length - 1; i >= 0 && keepGoing; i--) {
       let obj = arrayFromLS[i];
@@ -137,6 +132,17 @@ document.addEventListener("click", function (event) {
     // plusknappen
   } else if (event.target.classList.contains("fa-plus")) {
     event.preventDefault();
+    let arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
+    let keepGoing = true;
+    for (let i = 0; i < arrayFromLS.length && keepGoing; i++) {
+      let obj = arrayFromLS[i];
+      if (obj.title == productName) {
+        keepGoing = false;
+        arrayFromLS.push(obj);
+      }
+    }
+    localStorage.setItem("productsInCart", JSON.stringify(arrayFromLS));
+    location.reload();
   }
   // deleteknappen
   else if (event.target.classList.contains("fa-trash")) {
