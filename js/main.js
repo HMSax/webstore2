@@ -73,9 +73,23 @@ form.addEventListener("submit", function (event) {
 
     // Hämta produktinformation från URL-parametrarna
     const urlParams = new URLSearchParams(window.location.search);
-    const productName =
-      "Antal varor: " +
-      JSON.parse(localStorage.getItem("productsInCart")).length;
+    let productName = "";
+    makeString();
+    function makeString() {
+      let varor = "Beställda varor: ";
+      const arrX = JSON.parse(localStorage.getItem("productsInCart"));
+      const arrU = JSON.parse(localStorage.getItem("uniqueInCart"));
+      arrU.forEach((prod) => {
+        let amountThisProductInCart = 0;
+        for (n = 0; n < arrX.length; n++) {
+          if (arrX[n].title == prod.title) {
+            amountThisProductInCart++;
+          }
+        }
+        varor = varor + amountThisProductInCart + " st " + prod.title + ", ";
+      });
+      productName = varor;
+    }
     const productPrice = urlParams.get("price");
 
     // Fyll i modalfönstret med användarens uppgifter och produktinformation

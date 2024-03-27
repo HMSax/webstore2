@@ -26,6 +26,8 @@ function updateCartDisplay() {
 
   let uniqueInCart = removeDupl(inCartList);
 
+  localStorage.setItem("uniqueInCart", JSON.stringify(uniqueInCart));
+
   uniqueInCart.forEach((product) => {
     const productInCart = document.createElement("div");
     let amountThisProductInCart = 0;
@@ -97,8 +99,9 @@ document.getElementById("cRyear").innerHTML = new Date().getFullYear();
 cartCount();
 
 document.getElementById("checkOutBtn").onclick = function () {
+  sumForURL = sumCounter.toFixed(2);
   // Skapa en URL för beställningsformuläret med produktinformationen som query parametrar
-  const orderFormUrl = `order.html?price=${encodeURIComponent(sumCounter)}`;
+  const orderFormUrl = `order.html?price=${encodeURIComponent(sumForURL)}`;
   // Omdirigera användaren till beställningsformuläret
   window.location.href = orderFormUrl;
 };
