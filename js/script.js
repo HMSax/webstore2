@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-  let allProductsJSON = [];
-  if (JSON.parse((localStorage.getItem("productsInCart").length = null))) {
+  let allProducts = [];
+  if (typeof localStorage.getItem("productsInCart") != "undefined") {
     let productsInCartJSON = [];
     localStorage.setItem("productsInCart", JSON.stringify(productsInCartJSON));
   }
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const productList = document.getElementById("product-list");
       data.forEach((product) => {
         //lägg till JSON-objekt i array
-        allProductsJSON.push(product);
+        allProducts.push(product);
 
         // Skapa produktkort
         const productCard = document.createElement("div");
@@ -47,7 +47,9 @@ document.addEventListener("DOMContentLoaded", function () {
         productList.appendChild(productCard);
       });
       // Spara alla produkter i localStorage
-      localStorage.setItem("allProductsArray", JSON.stringify(allProductsJSON));
+      console.log(allProducts);
+      localStorage.setItem("allProductsArray", JSON.stringify(allProducts));
+      console.log(JSON.parse(localStorage.getItem("allProductsArray")));
     })
     .catch((error) => {
       console.error("Fetch error:", error);
@@ -68,12 +70,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (event.target.classList.contains("btn-order")) {
       event.preventDefault();
+
       let arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
+      let allProd = JSON.parse(localStorage.getItem("allProductsArray"));
       console.log(arrayFromLS.length);
-      for (let i = 0; i < allProductsJSON.length; i++) {
-        if ((allProductsJSON[i].title = productName)) {
-          arrayFromLS.push(allProductsJSON[i]);
-          break;
+      console.log(allProd);
+      for (let i = 0; i < allProd.length; i++) {
+        let obj = allProd[i];
+        if (obj.title == productName) {
+          arrayFromLS.push(obj);
         }
       }
       console.log(arrayFromLS.length);
