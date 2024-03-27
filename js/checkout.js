@@ -1,5 +1,18 @@
 let inCartList = JSON.parse(localStorage.getItem("productsInCart"));
-let uniqueInCart = Array.from(new Set(inCartList));
+
+let removeDupl = (inCartList) => {
+  const flag = {};
+  const unique = [];
+  inCartList.forEach((elem) => {
+    if (!flag[elem.title]) {
+      flag[elem.title] = true;
+      unique.push(elem);
+    }
+  });
+  return unique;
+};
+let uniqueInCart = removeDupl(inCartList);
+
 let sumCounter = 0;
 let itemsCounter = 0;
 
@@ -61,7 +74,8 @@ function updateCartDisplay() {
   });
 }
 
-document.getElementById("items-count").innerHTML = "Varor: " + itemsCounter;
+document.getElementById("items-count").innerHTML =
+  "Antal varor: " + itemsCounter;
 document.getElementById("cost-count").innerHTML = "Summa: $" + sumCounter;
 //dynamiskt år i footer
 document.getElementById("cRyear").innerHTML = new Date().getFullYear();
@@ -76,7 +90,7 @@ document.getElementById("checkOutBtn").onclick = function () {
   window.location.href = orderFormUrl;
 };
 
-document.getElementById("cartItemsCount2").innerHTML = cartCount2();
+document.getElementById("cartItemsCount2").innerHTML = uniqueInCart.length;
 
 function cartCount() {
   arrayToCount = JSON.parse(localStorage.getItem("productsInCart"));
@@ -84,14 +98,5 @@ function cartCount() {
     document.getElementById("cartItemsCount").innerHTML = arrayToCount.length;
   } else {
     document.getElementById("cartItemsCount").innerHTML = 0;
-  }
-}
-
-function cartCount2() {
-  arrayToCount = JSON.parse(localStorage.getItem("productsInCart"));
-  if (arrayToCount.length != null) {
-    return arrayToCount.length;
-  } else {
-    return 0;
   }
 }
