@@ -71,7 +71,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if (event.target.classList.contains("btn-order")) {
       event.preventDefault();
       let arrayFromLS = [];
-      arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
+
+      if (typeof localStorage.getItem("productsInCart") != "undefined") {
+        arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
+      }
+
       let allProd = JSON.parse(localStorage.getItem("allProductsArray"));
 
       for (let i = 0; i < allProd.length; i++) {
