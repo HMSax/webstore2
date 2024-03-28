@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   let allProducts = [];
-  if (typeof localStorage.getItem("productsInCart") == "undefined") {
+  if (localStorage.getItem("productsInCart") === null) {
     let productsInCartJSON = [];
     localStorage.setItem("productsInCart", JSON.stringify(productsInCartJSON));
   }
@@ -70,14 +70,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (event.target.classList.contains("btn-order")) {
       event.preventDefault();
-      let arrayFromLS = [];
-
-      if (typeof localStorage.getItem("productsInCart") == "undefined") {
-        localStorage.setItem("productsInCart", JSON.stringify(arrayFromLS));
-      }
-
       let allProd = JSON.parse(localStorage.getItem("allProductsArray"));
-      arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
+      let arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
 
       for (let i = 0; i < allProd.length; i++) {
         let obj = allProd[i];
