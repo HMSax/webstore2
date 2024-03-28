@@ -72,11 +72,12 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault();
       let arrayFromLS = [];
 
-      if (typeof localStorage.getItem("productsInCart") != "undefined") {
-        arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
+      if (typeof localStorage.getItem("productsInCart") == "undefined") {
+        localStorage.setItem("productsInCart", JSON.stringify(arrayFromLS));
       }
 
       let allProd = JSON.parse(localStorage.getItem("allProductsArray"));
+      arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
 
       for (let i = 0; i < allProd.length; i++) {
         let obj = allProd[i];
