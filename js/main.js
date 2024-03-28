@@ -88,6 +88,8 @@ form.addEventListener("submit", function (event) {
         }
         varor = varor + amountThisProductInCart + " st " + prod.title + ", ";
       });
+      varor = varor.slice(0, -2);
+      varor = varor + ".";
       productName = varor;
     }
     const productPrice = urlParams.get("price");
