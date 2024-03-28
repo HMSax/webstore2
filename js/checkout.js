@@ -53,8 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <h6 class="text-muted">${product.title}</h6>
   </div>
   <div class="col-md-3 col-lg-3 col-xl-3 d-flex">
-    <button class="btn btn-link px-2"
-      onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+    <button class="btn btn-link px-2">
       <i class="fas fa-minus"></i>
     </button>
 
@@ -63,8 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }" min="0" name="quantity" value="${amountThisProductInCart}" type="number"
       class="form-control form-control-sm text-end" readonly="" />
 
-    <button class="btn btn-link px-2"
-      onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+    <button class="btn btn-link px-2">
       <i class="fas fa-plus"></i>
     </button>
   </div>

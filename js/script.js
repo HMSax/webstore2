@@ -47,9 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
         productList.appendChild(productCard);
       });
       // Spara alla produkter i localStorage
-      console.log(allProducts);
       localStorage.setItem("allProductsArray", JSON.stringify(allProducts));
-      console.log(JSON.parse(localStorage.getItem("allProductsArray")));
     })
     .catch((error) => {
       console.error("Fetch error:", error);
