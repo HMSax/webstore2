@@ -109,6 +109,7 @@ form.addEventListener("submit", function (event) {
     successModal.show();
   }
 });
+//nollställ kundvagnen när beställningen är slutförd och bekräftelse-modal stängs
 document.getElementById("closeAndReset").onclick = function () {
   let productsInCartJSON = [];
   localStorage.setItem("productsInCart", JSON.stringify(productsInCartJSON));
