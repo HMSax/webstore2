@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault();
       let arrayFromLS = JSON.parse(localStorage.getItem("productsInCart"));
       let arrayAfterDel = arrayFromLS;
-      for (let i = 0; i < arrayFromLS.length; i++) {
+      for (let i = arrayFromLS.length - 1; i >= 0; i--) {
         let obj = arrayFromLS[i];
         if (obj.title == productName) {
           arrayAfterDel.splice(i, 1);
